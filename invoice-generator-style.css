@@ -23,3 +23,7 @@
 input {
   width: 100%;
 }
+
+#incomplete-details-warning {
+  margin: 10px 10px;
+}
