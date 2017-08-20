@@ -1,0 +1,25 @@
+.margin-05 { margin: 0.5em 0; }
+.margin-10 { margin: 1.0em 0; }
+.margin-15 { margin: 1.5em 0; }
+.margin-20 { margin: 2.0em 0; }
+.margin-25 { margin: 2.5em 0; }
+.margin-30 { margin: 3.0em 0; }
+
+.padding-05 { padding: 0.5em 0; }
+.padding-10 { padding: 1.0em 0; }
+.padding-15 { padding: 1.5em 0; }
+.padding-20 { padding: 2.0em 0; }
+.padding-25 { padding: 2.5em 0; }
+.padding-30 { padding: 3.0em 0; }
+
+#logo img {
+  width: 90px;
+}
+
+#logo {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+}

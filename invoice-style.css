@@ -1,0 +1,144 @@
+
+
+body {
+  position: relative;
+  width: 21cm;
+  /*height: 29.7cm;*/
+  margin: 0 auto;
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-family: Arial;
+}
+
+.page {
+  height: 26cm;
+  overflow: hidden;
+}
+
+header {
+  padding: 10px 0;
+}
+
+.header {
+  visibility: visible;
+}
+
+#logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#logo img {
+  width: 90px;
+}
+
+.gst {
+  position: absolute;
+}
+
+.shop-address {
+  position: absolute;
+  right: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#invoice-number {
+  vertical-align: top;
+  padding-top: 20px;
+}
+
+.tax-invoice{
+  text-align: center;
+}
+
+#billing {
+  text-align: left;
+}
+
+#shipping {
+  text-align: right;
+}
+
+#shipping,
+#billing {
+  margin: 0;
+  padding: 0;
+}
+
+.address-invoice-section {
+  margin-top: 15px;
+  border-top: 1px solid black;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  padding: 5px 20px;
+  color: black;
+  border-bottom: 1px solid #5D6975;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+table .item {
+  text-align: left;
+  width: 20%;
+}
+
+table td {
+  padding: 5px 20px;
+  text-align: center;
+}
+
+table td.serial,
+table td.item {
+  vertical-align: top;
+}
+
+table td.weight,
+table td.item,
+table td.serial,
+table td.cost-per-gram,
+table td.hsn-code,
+table td.discount,
+table td.taxable-total {
+  font-size: 1.2em;
+}
+
+table td.grand {
+  border-top: 1px solid #5D6975;
+
+  color: black;
+}
+
+.footer {
+  height: 3cm;
+  border-top: 1px solid black;
+  padding-top: 20px;
+  visibility: visible;
+}
+
+
+.declaration {
+  width: 60%;
+  text-align: left;
+  padding: 0;
+}
+
+.authorised-signatory {
+  width: 40%;
+  text-align: right;
+  padding: 0;
+}

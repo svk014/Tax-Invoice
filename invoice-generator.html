@@ -1,0 +1,125 @@
+<html>
+<head>
+  <title>Invoice Generator</title>
+  <!-- first script -->
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script src="moment.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDOqru0wReJZc18X5g1CVjhAdPgfCSNaf4",
+      authDomain: "inventory-and-sales-175806.firebaseapp.com",
+      databaseURL: "https://inventory-and-sales-175806.firebaseio.com",
+      projectId: "inventory-and-sales-175806",
+      storageBucket: "inventory-and-sales-175806.appspot.com",
+      messagingSenderId: "160800068075"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+  <link rel="stylesheet" href="invoice-generator-style.css" media="all" />
+</head>
+
+<body>
+  <div class="container">
+    <div id="logo">
+      <img src="logo.png" class="margin-15">
+    </div>
+    <div class="text-center">
+      <input id="invoice-check" type="checkbox" data-toggle="toggle" data-on="Invoice" data-off="No Invoice" data-size="small" data-onstyle="warning">
+    </div>
+    <div class="text-center invoiced-entity">
+      <h3>Invoice no. - <span  id="tax-invoice-number">nil</span></h3>
+    </div>
+    <div class="row margin-15">
+      <h3>Billing Date</h3>
+      <input type="date" id="date" class="col-md-3 col-sm-6"/>
+    </div>
+    <div id="billing-details" class="row margin-15">
+      <h3>Billing Details</h3>
+      <input id="billing-customer-name" type="text" placeholder="Customer Name" class="col-md-3 col-sm-6"/>
+      <input id="billing-address" type="text" placeholder="Address" class="col-md-3 col-sm-6"/>
+      <input id="billing-state-pin" type="text" placeholder="State - PIN" class="col-md-3 col-sm-6"/>
+      <input id="billing-phone-number" type="text" placeholder="Phone Number" class="col-md-3 col-sm-6"/>
+      <input id="billing-gstin" type="text" placeholder="GSTIN" class="col-md-3 col-sm-6"/>
+    </div>
+    <div id="shipping-details" class="row margin-15">
+      <h3>Shipping Details</h3>
+      <div class="help-block"><a id="copy-billing-address">Copy Billing Details</a></div>
+      <input id="shipping-customer-name" type="text" placeholder="Customer Name" class="col-md-3 col-sm-6"/>
+      <input id="shipping-address" type="text" placeholder="Address" class="col-md-3 col-sm-6"/>
+      <input id="shipping-state-pin" type="text" placeholder="State - PIN" class="col-md-3 col-sm-6"/>
+      <input id="shipping-phone-number" type="text" placeholder="Phone Number" class="col-md-3 col-sm-6"/>
+      <input id="shipping-gstin" type="text" placeholder="GSTIN" class="col-md-3 col-sm-6"/>
+    </div>
+    <div id="items" class="row margin-15">
+      <h3>Items</h3>
+      <div class="item">
+        <input type="text" placeholder="Item Code" class="col-sm-2 item-code"/>
+        <input type="text" placeholder="Item" class="col-sm-2 item-description"/>
+        <input type="number" placeholder="Weight" class="col-sm-2 item-weight" min="0"/>
+        <input type="number" placeholder="Cost per gram" class="col-sm-2 cost-per-gram" min="0"/>
+        <input type="number" placeholder="HSN" class="col-sm-1 hsn-code" value="7113" disabled/>
+        <input type="number" placeholder="Discount" class="col-sm-2 item-discount" min="0"/>
+        <span class="col-sm-1 text-right item-total">0</span>
+      </div>
+    </div>
+    <div class="row margin-15 buttons text-right">
+      <button id="add-item-row" class="btn btn-danger" type="button">Add</button>
+      <button id="remove-last-item-row" class="btn btn-warning" type="button">Remove last</button>
+    </div>
+    <div class="row margin-15 summation">
+      <div class="col-sm-10 text-right">
+        <h4>Sub total</h4>
+      </div>
+      <div class="col-sm-2 text-right">
+        <h4><span id="sub-total">0</span></h4>
+      </div>
+      <div class="text-right invoiced-entity text-center">
+        <input id="gst-type-check" type="checkbox" checked data-toggle="toggle" data-on="SGST+CSGT" data-off="IGST" data-size="small" data-offstyle="success">
+      </div>
+      <div class="col-sm-10 text-right invoiced-entity">
+        CGST @ <span id="cgst-rate">1.5</span>%
+      </div>
+      <div class="col-sm-2 text-right invoiced-entity">
+        <span id="cgst">0</span>
+      </div>
+      <div class="col-sm-10 text-right invoiced-entity">
+        SGST @ <span id="sgst-rate">1.5</span>%
+      </div>
+      <div class="col-sm-2 text-right invoiced-entity">
+        <span id="sgst">0</span>
+      </div>
+      <div class="col-sm-10 text-right invoiced-entity">
+        IGST @ <span id="igst-rate">0.0</span>%
+      </div>
+      <div class="col-sm-2 text-right invoiced-entity">
+        <span id="igst">0</span>
+      </div>
+      <div class="col-sm-10 text-right">
+        Round off
+      </div>
+      <div class="col-sm-2 text-right">
+        <span id="round-off">0</span>
+      </div>
+      <div class="col-sm-10 text-right">
+        <h4>Grand total</h4>
+      </div>
+      <div class="col-sm-2 text-right">
+        <h4><span id="grand-total">0</span></h4>
+      </div>
+    </div>
+    <div class="row margin-15 text-center invoiced-entity">
+      <input id="payment-mode" type="checkbox" checked data-toggle="toggle" data-on="Cash" true="Cash" data-off="Credit" false="Credit" data-size="small" data-offstyle="primary" data-onstyle="success">
+    </div>
+    <div class="row margin-15 submit text-center">
+      <button id="create-entry" class="btn btn-success" type="button">Create Entry</button>
+    </div>
+  </div>
+  <script src="invoice-generator.js" type="text/javascript"></script>
+</body>
+</html>
