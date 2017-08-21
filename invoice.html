@@ -3,6 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Invoice</title>
+    <!-- this section should be first -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="moment.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyDOqru0wReJZc18X5g1CVjhAdPgfCSNaf4",
+        authDomain: "inventory-and-sales-175806.firebaseapp.com",
+        databaseURL: "https://inventory-and-sales-175806.firebaseio.com",
+        projectId: "inventory-and-sales-175806",
+        storageBucket: "inventory-and-sales-175806.appspot.com",
+        messagingSenderId: "160800068075"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <!-- the above section should be first -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="invoice-style.css" media="all" />
   </head>
   <body>
