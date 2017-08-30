@@ -22,14 +22,23 @@
     <link rel="stylesheet" href="invoice-style.css" media="all" />
   </head>
   <body>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div>
+        <input id="invoice-number"/>
+        <button id="load-invoice">Load Invoice</button>
+      </div>
+    </div>
+  </div>
   <div class="page">
     <header class="clearfix">
       <div class="header">
         <div class="gst">
             <b>GST no.</b><br> 19ALNPD8516E1Z0<br><br>
             <b>PAN</b> ALNPD8516E<br><br>
-            <b>Billing date</b><br> 16 August 2017<br><br>
-            <b>Original for recipient</b>
+            <b>Billing date</b><br><span id="date">16 August 2017</span><br><br>
+            <b><span id="receipt-copy">Original for recipient</span></b>
         </div>
         <div class="shop-address">
             <b>Das & Co Jewellers</b><br>
@@ -52,21 +61,21 @@
         <tr>
           <td id="billing">
             <h4>Billing address</h4>
-            <div>Customer Name</div>
-            <div>Address<br /> State - PIN</div>
-            <div>+91-PhoneNumber</div>
-            <div>GSTIN</div>
+            <div><span id="billing-customer-name">Customer Name</span></div>
+            <div><span id="billing-address">Address</span><br /> <span id="billing-state-pin">State - PIN</span></div>
+            <div><span id="billing-phone-number">+91-PhoneNumber</span></div>
+            <div><span id="billing-gstin"></span></div>
           </td>
-          <td id="invoice-number">
-              Invoice no. - 100101
-              <br>[Credit Payment]
+          <td id="invoice-details">
+              Invoice no. - <span id="invoice-number">100101</span>
+              <br>[<span id="payment-mode">Credit</span> Payment]
           </td>
           <td id="shipping">
             <h4>Shipping address</h4>
-            <div>Customer Name</div>
-            <div>Address<br /> State - PIN</div>
-            <div>+91-PhoneNumber</div>
-            <div>GSTIN</div>
+            <div><span id="shipping-customer-name">Customer Name</span></div>
+            <div><span id="shipping-address">Address</span><br /> <span id="shipping-state-pin">State - PIN</span></div>
+            <div><span id="shipping-phone-number">+91-PhoneNumber</span></div>
+            <div><span id="shipping-gstin"></span></div>
           </td>
         </tr>
       </div>
@@ -77,50 +86,14 @@
           <tr>
             <th class="serial">S.no.</th>
             <th class="item">Item Description</th>
-            <th class="weight">Weight</th>
+            <th class="weight">Weight (g)</th>
             <th class="cost-per-gram">Cost<br>per gram</th>
             <th class="hsn-code">HSN/SAC code</th>
             <th class="discount">Discount</th>
             <th class="taxable-total">Total</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- <tr>
-            <td class="serial">1</td>
-            <td class="item">Design and development of pizzamax.in website</td>
-            <td class="weight"></td>
-            <td class="cost-per-gram"></td>
-            <td class="hsn-code">999799</td>
-            <td class="discount">0</td>
-            <td class="taxable-total">₹<span>16,000.00</span></td>
-          </tr> -->
-          <tr>
-            <td class="serial">2</td>
-            <td class="item">Bracelet golden</td>
-            <td class="weight">40.00</td>
-            <td class="cost-per-gram">2980</td>
-            <td class="hsn-code">7113</td>
-            <td class="discount">0</td>
-            <td class="taxable-total">₹1,19,200.00</td>
-          </tr>
-          <tr>
-            <td class="serial">3</td>
-            <td class="item">Ear ring golden</td>
-            <td class="weight">40.00</td>
-            <td class="cost-per-gram">3050</td>
-            <td class="hsn-code">7113</td>
-            <td class="discount">0</td>
-            <td class="taxable-total">₹1,22,000.00</td>
-          </tr>
-          <tr>
-            <td class="serial">4</td>
-            <td class="item">Nose pin</td>
-            <td class="weight">40.00</td>
-            <td class="cost-per-gram">2990</td>
-            <td class="hsn-code">7113</td>
-            <td class="discount">0</td>
-            <td class="taxable-total">₹1,19,600.00</td>
-          </tr>
+        <tbody class="particulars">
           <tr>
             <td colspan="7"/>
           </tr>
@@ -128,40 +101,40 @@
             <td colspan="7"/>
           </tr>
           <tr>
-            <td colspan="6" class="grand">TOTAL TAXABLE AMOUNT</td>
-            <td class="taxable-total grand">₹16,000.00</td>
+            <td colspan="4" class="grand">TOTAL TAXABLE AMOUNT</td>
+            <td colspan="3" class="taxable-total grand right-text">₹<span id="total-taxable-amount">16,000.00</span></td>
           </tr>
           <tr>
-            <td colspan="5">SGST</td>
-            <td>0%</td>
-            <td class="taxable-total">₹0.00</td>
+            <td colspan="4">SGST</td>
+            <td><span id="sgst-rate">0</span>%</td>
+            <td colspan="2" class="taxable-total right-text">₹<span id="sgst">0.00</td>
           </tr>
           <tr>
-            <td colspan="5">CGST</td>
-            <td>0%</td>
-            <td class="taxable-total">₹0.00</td>
+            <td colspan="4">CGST</td>
+            <td><span id="cgst-rate">0</span>%</td>
+            <td colspan="2" class="taxable-total right-text">₹<span id="cgst">0.00</td>
           </tr>
           <tr>
-            <td colspan="5">IGST</td>
-            <td>18%</td>
-            <td class="taxable-total">₹2,880.00</td>
+            <td colspan="4">IGST</td>
+            <td><span id="igst-rate">18</span>%</td>
+            <td colspan="2" class="taxable-total right-text">₹<span id="igst">2,880.00</span></td>
           </tr>
           <tr>
-            <td colspan="5">ROUND OFF</td>
+            <td colspan="4">ROUND OFF</td>
             <td></td>
-            <td class="taxable-total">₹0.00</td>
+            <td colspan="2" class="taxable-total right-text">₹<span id="round-off">0.00</span></td>
           </tr>
           <tr>
-            <td colspan="6" class="grand taxable-total">GRAND TOTAL</td>
-            <td class="grand taxable-total">₹18,880.00</td>
+            <td colspan="4" class="grand taxable-total">GRAND TOTAL</td>
+            <td colspan="3" class="grand taxable-total right-text">₹<span id="grand-total">18,880.00</span></td>
           </tr>
           <tr>
-            <td colspan="6" class="taxable-total">GRAND TOTAL IN WORDS</td>
-            <td colspan="1" class="taxable-total">Rupees Eighteen Thousand Eight Hundred Eighty only</td>
+            <td colspan="4" class="taxable-total">GRAND TOTAL IN WORDS</td>
+            <td colspan="3" class="taxable-total right-text">Rupees <span id="grand-total-in-words">Eighteen Thousand Eight Hundred Eighty</span> only</td>
           </tr>
           <tr>
-            <td colspan="6" class="">REVERSE CHARGES</td>
-            <td colspan="1" class="">Nil</td>
+            <td colspan="4" class="">REVERSE CHARGES</td>
+            <td colspan="3" class="right-text">Nil</td>
           </tr>
         </tbody>
       </table>
@@ -186,5 +159,6 @@
       </tr>
     </table>
   </div>
+  <script src="invoice.js" type="text/javascript"></script>
   </body>
 </html>

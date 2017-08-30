@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Invoice</title>
+    <!-- this section should be first -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="moment.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyDOqru0wReJZc18X5g1CVjhAdPgfCSNaf4",
+        authDomain: "inventory-and-sales-175806.firebaseapp.com",
+        databaseURL: "https://inventory-and-sales-175806.firebaseio.com",
+        projectId: "inventory-and-sales-175806",
+        storageBucket: "inventory-and-sales-175806.appspot.com",
+        messagingSenderId: "160800068075"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <!-- the above section should be first -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="invoice-style.css" media="all" />
+  </head>
+  <body>
+  <div class="page">
+    <header class="clearfix">
+      <div class="header">
+        <div class="gst">
+            <b>GST no.</b><br> 19CJMPD7558K1ZI<br><br>
+            <b>PAN</b> CJMPD7558K<br><br>
+            <b>Billing date</b><br> 21 August 2017<br><br>
+            <b>Original for recipient</b>
+        </div>
+        <div class="shop-address">
+            <b>QuanCom Technologies</b><br>
+            Ward No 38, 19/12/1237<br>
+            Sukanta Nagar, V Pally<br>
+            Siliguri, Darjeeling<br>
+            West Bengal - 734006<br><br>
+            +91-7679691974, +91-9205309439<br>
+            souvik014@gmail.com
+
+        </div>
+        <div id="logo">
+          <img src="logo-qct.png" alt="">
+        </div>
+        <div class="tax-invoice">
+          <b>Tax Invoice</b>
+        </div>
+      </div>
+      <table class="address-invoice-section">
+        <tr>
+          <td id="billing">
+            <h4>Billing address</h4>
+            <div>ARC Yummy Foods India Pvt Ltd.<br/>Building No X/ 438</div>
+            <div>101 Junction, Thellakom P.O<br />Ettumannoor, Kottayam, Kerela - 686630</div>
+            <div><br/></div>
+            <div>GSTIN - 32AALCA6797J1Z5</div>
+          </td>
+          <td id="invoice-number">
+              Invoice no. - 100101
+              <br>[Credit Payment]
+          </td>
+          <td id="shipping">
+            <h4>Shipping address</h4>
+            <div>ARC Yummy Foods India Pvt Ltd.<br/>Building No X/ 438</div>
+            <div>101 Junction, Thellakom P.O<br />Ettumannoor, Kottayam, Kerela - 686630</div>
+            <div><br/></div>
+            <div>GSTIN - 32AALCA6797J1Z5</div>
+          </td>
+        </tr>
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="serial">S.no.</th>
+            <th class="item">Item Description</th>
+            <th class="weight"></th>
+            <th class="cost-per-gram">Cost</th>
+            <th class="hsn-code">HSN/SAC code</th>
+            <th class="discount">Discount</th>
+            <th class="taxable-total">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="serial">1</td>
+            <td class="item">Design and development of pizzamax.in website</td>
+            <td class="weight"></td>
+            <td class="cost-per-gram">16,000.00</td>
+            <td class="hsn-code">998314</td>
+            <td class="discount">0</td>
+            <td class="taxable-total">₹<span>16,000.00</span></td>
+          </tr>
+          <tr>
+            <td colspan="6" class="grand">TOTAL TAXABLE AMOUNT</td>
+            <td class="taxable-total grand">₹16,000.00</td>
+          </tr>
+          <tr>
+            <td colspan="5">SGST</td>
+            <td>0%</td>
+            <td class="taxable-total">₹0.00</td>
+          </tr>
+          <tr>
+            <td colspan="5">CGST</td>
+            <td>0%</td>
+            <td class="taxable-total">₹0.00</td>
+          </tr>
+          <tr>
+            <td colspan="5">IGST</td>
+            <td>18%</td>
+            <td class="taxable-total">₹2,880.00</td>
+          </tr>
+          <tr>
+            <td colspan="5">ROUND OFF</td>
+            <td></td>
+            <td class="taxable-total">₹0.00</td>
+          </tr>
+          <tr>
+            <td colspan="6" class="grand taxable-total">GRAND TOTAL</td>
+            <td class="grand taxable-total">₹18,880.00</td>
+          </tr>
+          <tr>
+            <td colspan="6" class="taxable-total">GRAND TOTAL IN WORDS</td>
+            <td colspan="1" class="taxable-total">Rupees Eighteen Thousand Eight Hundred Eighty only</td>
+          </tr>
+          <tr>
+            <td colspan="6" class="">REVERSE CHARGES</td>
+            <td colspan="1" class="">Nil</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+  <div class="footer">
+    <table>
+      <tr>
+        <td class="taxable-total declaration">
+          Declaration<br><br>
+          We declare that this shows the actual price of the goods/services described and all the particulars are true and correct.
+        </td>
+        <td class="taxable-total authorised-signatory">
+          For QuanCom Technologies<br><br><br>
+          Authorised Signatory
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          This is a computer generated invoice.
+        </td>
+      </tr>
+    </table>
+  </div>
+  </body>
+</html>

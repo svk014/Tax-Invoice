@@ -169,8 +169,10 @@ var uploadToFirebase =  function() {
       newSerial=1;
     }
     firebase.database().ref("/all-invoices/"+newSerial).set(generateJson())
+    .then(function(){window.setTimeout(triggerSync(),1000)})
     if(toBeInvoiced())
       firebase.database().ref("/billed-invoices/"+currentInvoiceNumber).set(newSerial)
+      .then(function(){window.setTimeout(triggerSync(),1000)})
   })
 }
 
@@ -181,6 +183,19 @@ $("#create-entry").on("click",function(){
   }
   uploadToFirebase()
 })
+
+var triggerSync = function() {
+    $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbzxf9-t_Nl_oAi9x3DC3oEsRUTu0RyfkLSHoSJQGG_8aCbHnDA/exec",
+        type: "get",
+        success: function (response) {
+          console.log(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
 
 var generateJson = function() {
   var invoiceDetails = {}
